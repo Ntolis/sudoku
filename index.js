@@ -13,7 +13,9 @@ function createSquares(arr) {
 
         for (let j = 0; j < arr[i].length; j++) {
             const square = document.createElement('input')
-            square.type = 'text'
+            square.type = 'number'
+            square.min = '0'
+            square.max = '9'
             square.classList.add('square')
 
             square.dataset.x = `${i}`
@@ -30,9 +32,18 @@ const squares = document.querySelectorAll('.square')
 
 
 squares.forEach(square => {
-    square.addEventListener('input', function () {
+    square.addEventListener('input', function (event) {
+
         const x = Number(this.dataset.x)
         const y = Number(this.dataset.y)
+
+        if (this.value === '') {
+            return boardState[x][y] = null
+        }
+
+        if(this.value <= 0 || this.value > 9){
+           return this.value = null
+        }
 
         const rows = getRows(x, y)
         const columns = getColumns(x, y)
@@ -43,7 +54,10 @@ squares.forEach(square => {
 
 
         boardState[x][y] = this.value
+
+        console.log(boardState)
     })
 })
+
 
 
