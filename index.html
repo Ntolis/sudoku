@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+
+    .board {
+        display: grid;
+        grid-template-columns: repeat(3, 150px);
+        grid-template-rows: repeat(3, 150px);
+    }
+
+    .bigSquare {
+        display: grid;
+        grid-template-columns: repeat(3, 50px);
+        grid-template-rows: repeat(3, 50px);
+
+        border: 1px solid red;
+    }
+
+    .square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid gray;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+</style>
+<body>
+
+<div class="board"></div>
+
+<script src="index.js" type="module"></script>
+
+</body>
+</html>
