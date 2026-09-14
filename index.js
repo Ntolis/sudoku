@@ -16,7 +16,7 @@ function createSquares(arr) {
             square.type = 'number'
             square.min = '0'
             square.max = '9'
-            square.classList.add('square')
+            square.classList.add('square');
 
             square.dataset.x = `${i}`
             square.dataset.y = `${j}`
@@ -26,38 +26,37 @@ function createSquares(arr) {
 
     }
 }
+
 createSquares(boardState)
 
 const squares = document.querySelectorAll('.square')
 
-
 squares.forEach(square => {
     square.addEventListener('input', function (event) {
 
+        const value = value
         const x = Number(this.dataset.x)
         const y = Number(this.dataset.y)
 
-        if (this.value === '') {
+        if (value === '') {
             return boardState[x][y] = null
         }
 
-        if(this.value <= 0 || this.value > 9){
-           return this.value = null
+        if (value <= 0 || value > 9) {
+            return this.value = null
         }
+
+
 
         const rows = getRows(x, y)
         const columns = getColumns(x, y)
 
-        let hasNumberBigSquare = hasNumberInBigSquare(x, this.value)
-        let hasNumberRow = hasNumberInRow(x, y, this.value)
-        let hasNumberColumns = hasNumberInColumns(x, y, this.value)
-
-
-        boardState[x][y] = this.value
-
-        console.log(boardState)
+        let hasNumberBigSquare = hasNumberInBigSquare(x, value)
+        let hasNumberRow = hasNumberInRow(x, y, value)
+        let hasNumberColumns = hasNumberInColumns(x, y, value)
+        
+        boardState[x][y] = value
     })
+
 })
-
-
 

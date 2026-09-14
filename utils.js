@@ -48,7 +48,6 @@ export function hasNumberInBigSquare(x,value) {
 export function hasNumberInRow(x,y,value) {
     const {mainRow,localRow} = getRows(x,y)
 
-
     for (let i = 0; i < mainRow.length; i++) {
         for (let j = 0; j < boardState[mainRow[i]].length; j++){
             if (value === boardState[mainRow[i]][localRow[j]]) {
