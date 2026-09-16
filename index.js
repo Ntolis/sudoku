@@ -31,32 +31,62 @@ createSquares(boardState)
 
 const squares = document.querySelectorAll('.square')
 
+const coorBoard = {}
+
+let beforeValue
+
 squares.forEach(square => {
     square.addEventListener('input', function (event) {
-
-        const value = value
         const x = Number(this.dataset.x)
         const y = Number(this.dataset.y)
 
-        if (value === '') {
+        const newValue = this.value
+        let beforeValue = boardState[x][y]
+
+        if(newValue === beforeValue){
+            return
+        }
+        
+
+        if (newValue === '') {
+            if(beforeValue !== null){
+                coorBoard[beforeValue] = coorBoard[beforeValue].filter((coordinate) => coordinate !== `${x},${y}` )
+            }
             return boardState[x][y] = null
         }
 
-        if (value <= 0 || value > 9) {
-            return this.value = null
+        if (newValue <= 0 || newValue > 9) {
+            return this.newValue = null
         }
+
+        if (beforeValue !== null) {
+            coorBoard[beforeValue] = coorBoard[beforeValue].filter((coordinate) => coordinate !== `${x},${y}` )
+        }
+
+
+        if (!(newValue in coorBoard)) {
+            coorBoard[newValue] = []
+        }
+
+        coorBoard[newValue].push(`${x},${y}`)
+
 
 
 
         const rows = getRows(x, y)
         const columns = getColumns(x, y)
 
-        let hasNumberBigSquare = hasNumberInBigSquare(x, value)
-        let hasNumberRow = hasNumberInRow(x, y, value)
-        let hasNumberColumns = hasNumberInColumns(x, y, value)
-        
-        boardState[x][y] = value
+        let hasNumberBigSquare = hasNumberInBigSquare(x, newValue)
+        let hasNumberRow = hasNumberInRow(x, y, newValue)
+        let hasNumberColumns = hasNumberInColumns(x, y, newValue)
+
+        boardState[x][y] = newValue
+        console.log(coorBoard)
     })
 
 })
+
+let obj = {
+    newValue: ['x, y']
+}
 
