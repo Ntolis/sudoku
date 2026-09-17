@@ -1,4 +1,4 @@
-import {boardState} from './index.js'
+import {boardState, coorBoard} from './index.js'
 
 const mapRows = [
     [0, 1, 2],
@@ -38,16 +38,21 @@ export function getColumns(x,y){
 }
 
 export function hasNumberInBigSquare(x,value) {
+    let coordinates = []
+
     for (let j = 0; j < boardState[x].length; j++) {
         if (value === boardState[x][j]) {
-            return true
+            coordinates.push(`${x},${j}`)
         }
     }
-    return false
+
+    return coordinates
 }
+
 export function hasNumberInRow(x,y,value) {
     const {mainRow,localRow} = getRows(x,y)
-
+    console.log("main-",mainRow)
+    console.log("local-",localRow)
     for (let i = 0; i < mainRow.length; i++) {
         for (let j = 0; j < boardState[mainRow[i]].length; j++){
             if (value === boardState[mainRow[i]][localRow[j]]) {
@@ -70,3 +75,67 @@ export function hasNumberInColumns(x,y,value) {
     }
     return false
 }
+
+let selectedValue = null
+
+export function highlightSameNumbers(currentValue) {
+    if (selectedValue !== null && coorBoard[selectedValue]) {
+        coorBoard[selectedValue].forEach(coordinate => {
+            const [x, y] = coordinate.split(',')
+
+            const square = document.querySelector(
+                `.square[data-x="${x}"][data-y="${y}"]`
+            )
+
+            square.classList.remove('square--selected')
+        })
+    }
+
+    if (currentValue === '') {
+        selectedValue = null
+        return
+    }
+
+    coorBoard[currentValue].forEach(coordinate => {
+        const [x, y] = coordinate.split(',')
+
+        const square = document.querySelector(
+            `.square[data-x="${x}"][data-y="${y}"]`
+        )
+
+        square.classList.add('square--selected')
+    })
+
+    selectedValue = currentValue
+}
+
+export function incorrectNumberInBigSquare(coordinates){
+    if (!coordinates.length) {
+        return
+    }
+
+    coordinates.forEach(coordinate => {
+        const [x, y] = coordinate.split(',')
+
+        const square = document.querySelector(
+            `.square[data-x="${x}"][data-y="${y}"]`
+        )
+
+        square.classList.add('square--incorrect')
+    })
+}
+// export function incorrectNumberInBigSquare(coordinates){
+//     if (!coordinates.length) {
+//         return
+//     }
+//
+//     coordinates.forEach(coordinate => {
+//         const [x, y] = coordinate.split(',')
+//
+//         const square = document.querySelector(
+//             `.square[data-x="${x}"][data-y="${y}"]`
+//         )
+//
+//         square.classList.add('square--incorrect')
+//     })
+// }

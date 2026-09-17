@@ -1,4 +1,7 @@
-import {getRows, getColumns, hasNumberInBigSquare, hasNumberInRow, hasNumberInColumns} from "./utils.js";
+import {
+    getRows, getColumns, hasNumberInBigSquare, hasNumberInRow, hasNumberInColumns, highlightSameNumbers,
+    incorrectNumberInBigSquare
+} from "./utils.js";
 
 const board = document.querySelector('.board');
 
@@ -31,9 +34,7 @@ createSquares(boardState)
 
 const squares = document.querySelectorAll('.square')
 
-const coorBoard = {}
-
-let beforeValue
+export const coorBoard = {}
 
 squares.forEach(square => {
     square.addEventListener('input', function (event) {
@@ -46,7 +47,6 @@ squares.forEach(square => {
         if(newValue === beforeValue){
             return
         }
-        
 
         if (newValue === '') {
             if(beforeValue !== null){
@@ -56,7 +56,7 @@ squares.forEach(square => {
         }
 
         if (newValue <= 0 || newValue > 9) {
-            return this.newValue = null
+            return this.value = null
         }
 
         if (beforeValue !== null) {
@@ -70,9 +70,6 @@ squares.forEach(square => {
 
         coorBoard[newValue].push(`${x},${y}`)
 
-
-
-
         const rows = getRows(x, y)
         const columns = getColumns(x, y)
 
@@ -80,13 +77,17 @@ squares.forEach(square => {
         let hasNumberRow = hasNumberInRow(x, y, newValue)
         let hasNumberColumns = hasNumberInColumns(x, y, newValue)
 
+        incorrectNumberInBigSquare(hasNumberBigSquare)
+
+        console.log(hasNumberBigSquare)
+
+
         boardState[x][y] = newValue
-        console.log(coorBoard)
+
+        highlightSameNumbers(newValue)
     })
 
+    square.addEventListener('click', function (event) {
+        highlightSameNumbers(this.value)
+    })
 })
-
-let obj = {
-    newValue: ['x, y']
-}
-
