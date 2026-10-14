@@ -50,30 +50,35 @@ export function hasNumberInBigSquare(x,value) {
 }
 
 export function hasNumberInRow(x,y,value) {
+    let coordinates = []
+
     const {mainRow,localRow} = getRows(x,y)
-    console.log("main-",mainRow)
-    console.log("local-",localRow)
+
     for (let i = 0; i < mainRow.length; i++) {
         for (let j = 0; j < boardState[mainRow[i]].length; j++){
             if (value === boardState[mainRow[i]][localRow[j]]) {
-                return true
+                coordinates.push(`${mainRow[i]},${localRow[j]}`)
             }
         }
     }
-    return false
+
+    console.log("alena-", coordinates)
+    return coordinates
 }
+
 export function hasNumberInColumns(x,y,value) {
+    let coordinates = []
     const {mainColumn,localColumn} = getColumns(x,y)
 
 
     for (let i = 0; i < mainColumn.length; i++){
         for (let j = 0 ; j < boardState[mainColumn[i]].length; j++){
             if (value === boardState[mainColumn[i]][localColumn[j]]){
-                return true
+                coordinates.push(`${mainColumn[i]},${localColumn[j]}`)
             }
         }
     }
-    return false
+    return coordinates
 }
 
 let selectedValue = null
@@ -117,6 +122,7 @@ export function incorrectNumberInBigSquare(coordinates){
     coordinates.forEach(coordinate => {
         const [x, y] = coordinate.split(',')
 
+
         const square = document.querySelector(
             `.square[data-x="${x}"][data-y="${y}"]`
         )
@@ -124,18 +130,31 @@ export function incorrectNumberInBigSquare(coordinates){
         square.classList.add('square--incorrect')
     })
 }
-// export function incorrectNumberInBigSquare(coordinates){
-//     if (!coordinates.length) {
-//         return
-//     }
-//
-//     coordinates.forEach(coordinate => {
-//         const [x, y] = coordinate.split(',')
-//
-//         const square = document.querySelector(
-//             `.square[data-x="${x}"][data-y="${y}"]`
-//         )
-//
-//         square.classList.add('square--incorrect')
-//     })
-// }
+
+export function incirrectNumberRow(coordinates){
+    if (!coordinates.length) {
+        return
+    }
+
+    coordinates.forEach(coordinate => {
+        const [x, y] = coordinate.split(',')
+        console.log(x)
+        console.log(y)
+
+        const square = document.querySelector(
+            `.square[data-x="${x}"][data-y="${y}"]`
+        )
+        //Алена, допиши , пж , отображение.Я не понимаю. Пытался разобраться и не получилось
+        console.log("SALAM",square)
+
+        console.log("АААА СОВПАДЕНИЕ ААААА")
+    })
+}
+
+export function incirrectNumberColumns(coordinates){
+    if (!coordinates.length) {
+        return
+    }
+}
+
+console.log(boardState)

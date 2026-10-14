@@ -127,9 +127,14 @@ h1 {
     background: #edf6f0;
 }
 
+.square--bigDick {
+    color: purple;
+}
+
+
 .square--incorrect {
     color: #a64b4b;
-    background: #faeeee;
+    background: #f8b9b9;
 }
 
 .square--fixed {

@@ -53,25 +53,33 @@
 // }
 
 
-let value= [
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
-    [1,2,3,4,5,6,7,8,9],
+let value = [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+
 ]
-function qweqwe (value) {
+
+function qweqwe(value) {
     for (let i = 0; i < value.length; i++) {
 
-        let numberOfEmptyCells = Math.floor(Math.random() * (value[i].length ))
-        console.log("random",numberOfEmptyCells)
-
-        let randomNumber = Math.floor(Math.random() * (value[i].length ))
-
-        value[i][randomNumber] = null
+        let numberOfEmptyCells = Math.floor(Math.random() * (value[i].length))
 
 
-        for (let j = 0 ; j < value[i].length; j++) {
+        for (let k = 0; k < numberOfEmptyCells; k++) {
 
-            let FirstRandomNumber = Math.floor(Math.random() * (value[i].length ))
+            let randomNumber = Math.floor(Math.random() * (value[i].length))
+
+            value[i][randomNumber] = null
+
+        }
+
+        for (let j = 0; j < value[i].length; j++) {
+
+            let FirstRandomNumber = Math.floor(Math.random() * (value[i].length))
             let tempNumber
 
             tempNumber = value[i][FirstRandomNumber]
@@ -82,6 +90,7 @@ function qweqwe (value) {
     }
     return value
 }
+
 console.log(qweqwe(value))
 
 

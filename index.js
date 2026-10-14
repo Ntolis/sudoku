@@ -1,6 +1,6 @@
 import {
     getRows, getColumns, hasNumberInBigSquare, hasNumberInRow, hasNumberInColumns, highlightSameNumbers,
-    incorrectNumberInBigSquare
+    incorrectNumberInBigSquare, incirrectNumberRow
 } from "./utils.js";
 
 const board = document.querySelector('.board');
@@ -44,13 +44,13 @@ squares.forEach(square => {
         const newValue = this.value
         let beforeValue = boardState[x][y]
 
-        if(newValue === beforeValue){
+        if (newValue === beforeValue) {
             return
         }
 
         if (newValue === '') {
-            if(beforeValue !== null){
-                coorBoard[beforeValue] = coorBoard[beforeValue].filter((coordinate) => coordinate !== `${x},${y}` )
+            if (beforeValue !== null) {
+                coorBoard[beforeValue] = coorBoard[beforeValue].filter((coordinate) => coordinate !== `${x},${y}`)
             }
             return boardState[x][y] = null
         }
@@ -60,7 +60,7 @@ squares.forEach(square => {
         }
 
         if (beforeValue !== null) {
-            coorBoard[beforeValue] = coorBoard[beforeValue].filter((coordinate) => coordinate !== `${x},${y}` )
+            coorBoard[beforeValue] = coorBoard[beforeValue].filter((coordinate) => coordinate !== `${x},${y}`)
         }
 
 
@@ -78,16 +78,19 @@ squares.forEach(square => {
         let hasNumberColumns = hasNumberInColumns(x, y, newValue)
 
         incorrectNumberInBigSquare(hasNumberBigSquare)
+        incorrectNumberInBigSquare(hasNumberRow)
+        incorrectNumberInBigSquare(hasNumberColumns)
 
-        console.log(hasNumberBigSquare)
-
+        // incirrectNumberColumns(hasNumberColumns)
 
         boardState[x][y] = newValue
 
         highlightSameNumbers(newValue)
+
     })
 
     square.addEventListener('click', function (event) {
         highlightSameNumbers(this.value)
     })
 })
+
